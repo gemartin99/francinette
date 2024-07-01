@@ -11,8 +11,11 @@ alias francinette="$HOME/francinette/tester.sh"
 alias paco="$HOME/francinette/tester.sh"
 '
 
-# Añadir los aliases al final del archivo .zshrc si no están ya definidos
-echo "$ALIASES" >> ~/.zshrc
+search_alias=$(cat ~/.zshrc | grep paco | wc -l )
+
+if [ $search_alias -eq 0 ];then
+	echo "$ALIASES" >> ~/.zshrc
+fi
 
 is_package_installed() {
     python3 -c "import $1" &> /dev/null
