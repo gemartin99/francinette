@@ -6,6 +6,14 @@ current_dir=$PWD
 # check for updates
 version=68
 
+ALIASES='
+alias francinette="$HOME/francinette/tester.sh"
+alias paco="$HOME/francinette/tester.sh"
+'
+
+# Añadir los aliases al final del archivo .zshrc si no están ya definidos
+echo "$ALIASES" >> ~/.zshrc
+
 is_package_installed() {
     python3 -c "import $1" &> /dev/null
 }
@@ -14,7 +22,6 @@ is_package_installed() {
 install_if_not_installed() {
     package=$1
     if ! is_package_installed $package; then
-        echo "Installing $package..."
         pip3 install $package > /dev/null 2>&1
     fi
 }
@@ -28,4 +35,4 @@ install_if_not_installed toml
 cd "$current_dir" || exit
 #source "$DIR"/venv/bin/activate
 
-python "$DIR"/main.py "$@"
+python3 "$DIR"/main.py "$@"
